@@ -11,7 +11,7 @@ function Banner() {
 
   return (
     <div className='banner'>
-        <div className='gradient'/>
+        <div className='gradient-overlay'/>
         <Carousel autoPlay infiniteLoop showStatus={false} showIndicators={false} showThumbs={false} interval={5000}>
             {banner.map(banner=>{
                 return (

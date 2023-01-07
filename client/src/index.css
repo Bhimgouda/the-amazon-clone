@@ -32,6 +32,27 @@ p{
   margin: 0;
 }
 
+/* Button */
+
+.btn{
+  cursor: pointer;
+  border: none;
+}
+
+.btn--atc{
+  position: relative;
+  padding: 10px;
+  font-size: 14px;
+  margin-top: 10px;
+  border: 1px solid #fcd34d;
+  background: linear-gradient(180deg,#fef08a,#facc15);
+  margin-top: auto;
+}
+
+.btn--atc:active{
+  background: #facc15;
+}
+
 
 /* Header */
 .nav__top{
@@ -219,7 +240,7 @@ p{
 /* Main */
 
 .main{
-  max-width: 1520px;
+  max-width: 1500px;
   margin: auto;
 }
 
@@ -229,11 +250,127 @@ p{
   position: relative;
 }
 
-.gradient{
+.gradient-overlay{
   position: absolute;
   width: 100%;
-  height: 40%;
+  height: 30%;
   background: linear-gradient(360deg,#f3f4f6, transparent);
   bottom: 0;
   z-index: 20;
 }
+
+/* Product-feed */
+
+.product-feed{
+  display: grid;
+  grid-auto-flow: row dense;
+}
+
+.product-feed__banner{
+  column-span: all;
+}
+
+@media screen and (min-width:560px) {
+  .product-feed{
+    grid-template-columns: repeat(2,1fr);
+    margin-top: -120px;
+  }
+  .product-feed__banner{
+    grid-column: 1/3
+  }
+}
+
+@media screen and (min-width:1024px) {
+  .product-feed{
+    grid-template-columns: repeat(3,1fr);
+    margin-top: -250px;
+  }
+   .product-feed__banner{
+    grid-column: 1/4;
+  }
+
+  .take-2-rows{
+    grid-column: 2/4;
+  }
+}
+
+@media screen and (min-width:1400px) {
+  .product-feed{
+    grid-template-columns: repeat(4,1fr);
+    margin-top: -300px;
+  }
+  .product-feed__banner{
+    grid-column: 1/5
+  }
+
+  .take-2-rows{
+    grid-column: 1/3;
+  }
+}
+
+
+/* Product */
+
+.product{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 11px;
+  padding: 20px;
+  background-color: white;
+  z-index: 30;
+}
+
+.product__category{
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  font-size: 13.5px;
+  font-style: italic;
+  color: #969696;
+}
+
+.product__price{
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.product__title{
+  margin: 10px 0;
+}
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+
+.product__image{
+  height: 200px;
+  width: 200px;
+  object-fit: contain;
+  align-self: center;
+}
+
+.product__description{
+  margin: 10px 0;
+  padding-right: 5px;
+  font-size: 14px;
+}
+
+.product__prime-container{
+  display: flex;
+  column-gap: 5px;
+  margin-top: 10px;
+  align-items: center;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.product__prime-logo{
+  width: 40px;
+  height: 25px;
+  object-fit: cover;
+}
+

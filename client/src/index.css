@@ -214,3 +214,26 @@ p{
     display: block;
   }
 }
+
+
+/* Main */
+
+.main{
+  max-width: 1520px;
+  margin: auto;
+}
+
+/* Main__Banner */
+
+.banner{
+  position: relative;
+}
+
+.gradient{
+  position: absolute;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(360deg,#f3f4f6, transparent);
+  bottom: 0;
+  z-index: 20;
+}

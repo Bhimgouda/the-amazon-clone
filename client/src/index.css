@@ -32,11 +32,15 @@ p{
   margin: 0;
 }
 
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
 /* Button */
 
 .btn{
   cursor: pointer;
-  border: none;
 }
 
 .btn--atc{
@@ -315,7 +319,7 @@ p{
   position: relative;
   display: flex;
   flex-direction: column;
-  margin: 11px;
+  margin: 12px;
   padding: 20px;
   background-color: white;
   z-index: 30;

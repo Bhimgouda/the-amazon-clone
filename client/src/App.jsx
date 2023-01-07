@@ -1,33 +1,23 @@
-import Header from "./components/Header";
-import Banner from "./components/Banner";
-import ProductFeed from "./components/ProductFeed";
-import axios from "axios"
-import { useEffect, useState } from "react";
+import {Routes, Route} from "react-router-dom"
+import Home from "./pages/Home";
+import WithoutNav from "./components/WithoutNav";
+import WithNav from "./components/WithNav";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
+return (
+  <Routes>
+    <Route element={<WithoutNav />}>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+    </Route>
+    <Route element={<WithNav />}>
+      <Route path="/" element={<Home />} />
+    </Route>
+</Routes>
+)
 
-  const [products,setProducts] = useState([])
-
-  useEffect(()=>{
-      const getPorducts = async()=>{
-          const {data} = await axios.get("https://fakestoreapi.com/products");
-          setProducts(data)
-      }
-      getPorducts()
-  },[]);
-
-  return (
-    <div style={{"backgroundColor":"#f3f4f6"}}>
-       {/* Header */}
-       <Header/>
-
-       <main className="main">
-       {/* Banner */}
-          <Banner/>
-          <ProductFeed products={products}/>
-       </main>
-    </div>
-  )
 }
 
 export default App;

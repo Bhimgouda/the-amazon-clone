@@ -5,47 +5,40 @@ import WithNav from "./components/WithNav";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { getTokenUser } from "./api-services/user";
+import jwt from 'jsonwebtoken'
 
 function App() {
-  const [user,setUser] = useState({name: "", email: ""});
+  const navigate = useNavigate()
 
-  // This is to check whether the user has unexpired token and get the user data from server if he refreshes the app and makes everthing re-render
-  const getUser = async(token)=>{
-    const {data} = await getTokenUser(token);
-    setUser(data)
-  }
+  const setUser = ()=>{
+    const token = localStorage.getItem("token");
+    if(token){
+      const userData = jwt.decode(token);
 
-  // After a user sign's in or registering a new user
-  const updateUser = (user)=>{
-    if(!user){
-      localStorage.removeItem("token")
-      setUser({ name: "", email: ""})
+      if(!userData){
+        localStorage.removeItem("token")
+        return navigate('/login')
+      }
+
+      else{
+        localStorage.setItem("user", JSON.stringify(userData))
+      }
     }
-    setUser(user);
   }
 
 
   useEffect(()=>{
-    const token = localStorage.getItem("token");
-    getUser(token)
-    // if(token){
-    //   const user = jwt.decode(token);
-    //   if(!user){
-    //     localStorage.removeItem("token")
-    //     return navigate('/login')
-    //   }
-    // }
+    setUser()
   },[])
 
 return (
   <Routes>
-    <Route element={<WithoutNav  />}>
-      <Route path="/login" element={<Login updateUser={updateUser} />} />
-      <Route path="/register" element={<Register updateUser={updateUser} />} />
+    <Route element={<WithoutNav />}>
+      <Route path="/login" element={<Login setUser={setUser}/>} />
+      <Route path="/register" element={<Register  setUser={setUser} />} />
     </Route>
-    <Route element={<WithNav updateUser={updateUser} user={user} />}>
+    <Route element={<WithNav />}>
       <Route path="/" element={<Home />} />
     </Route>
 </Routes>

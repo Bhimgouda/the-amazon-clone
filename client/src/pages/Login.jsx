@@ -4,7 +4,7 @@ import axios from "axios"
 import "../css/auth.css"
 import { loginUser } from '../api-services/user'
 
-function Login({updateUser}) {
+function Login({setUser}) {
 
     const navigate = useNavigate()
 
@@ -17,8 +17,9 @@ function Login({updateUser}) {
         }
         const {data:userData} = await loginUser(user);
         if(userData){
-            localStorage.setItem("token", user.token);
-            updateUser(userData)
+            localStorage.setItem("token", userData.token);
+            console.log(setUser);
+            setUser()
             return navigate("/")
         }
     }

@@ -4,7 +4,7 @@ import "../css/auth.css"
 import axios from "axios"
 import { registerUser } from '../api-services/user'
 
-function Register({updateUser}) {
+function Register({setUser}) {
   const navigate = useNavigate()
 
   const handleRegister = async(e) =>{
@@ -18,8 +18,9 @@ function Register({updateUser}) {
     const {data:userData} = await registerUser(user)
 
     if(userData){
-      localStorage.setItem("token", user.token);
-      updateUser(userData)
+      localStorage.setItem("token", userData.token);
+      console.log(setUser)
+      setUser()
       return navigate("/")
   }
 }

@@ -5,7 +5,7 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import {useNavigate} from 'react-router-dom'
 
-function Header({updateUser, user}) {
+function Header() {
     const [bottomNavbarLinks,setBottomNavbarLinks] = useState(["Amazon miniTV",
         "Sell",
         "Best Sellers",
@@ -19,10 +19,13 @@ function Header({updateUser, user}) {
         "Home & Kitchen"])
 
         const navigate = useNavigate()
+        const user = JSON.parse(localStorage.getItem('user'));
 
-        const signIn = ()=>{
-            navigate("/login")
+        const handleLogout = ()=>{
+            localStorage.clear()
+            navigate("/")
         }
+
 
   return (
     <header className='nav'>
@@ -41,9 +44,9 @@ function Header({updateUser, user}) {
 
             {/* Right */}
                 <div className="nav__right">
-                    {user && user.name && <p onClick={()=>updateUser()}>logout</p>}
-                    <div onClick={signIn} className='nav__right__1'>
-                        <p>{user && user.name || "login"}</p>
+                    {user && user.name && <p onClick={handleLogout} >logout</p>} 
+                    <div onClick={()=>navigate("/login")} className='nav__right__1'>
+                        <p>{user && user.name || "login"}</p>  
                         <p style={{"font-weight":"700"}}>Account & Lists</p>
                     </div>
                     <div className='nav__right__2'>

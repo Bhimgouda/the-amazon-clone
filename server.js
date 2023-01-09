@@ -36,7 +36,7 @@ app.post('/api/register',validateUser, catchAsync(async(req,res)=>{
 
     // Create token
     const token = jwt.sign(
-        { user_id: user._id, email },
+        { user_id: user._id, email, name: user.name },
         process.env.TOKEN_KEY,
         {
           expiresIn: "2h",
@@ -68,7 +68,7 @@ app.post('/api/login',validateUser, catchAsync(async(req,res)=>{
     // create token
 
     const token = jwt.sign(
-        {user_id: user._id, email},
+        {user_id: user._id, email, name: user.name},
         process.env.TOKEN_KEY,
         {
             expiresIn :"2h",
@@ -88,7 +88,7 @@ app.get("/api/tokenUser",catchAsync( async(req,res)=>{
 
     const decoded = jwt.decode(token,process.env.TOKEN_KEY)
     if(decoded){
-        console.log(decoded.user_id)
+        
         const user = await User.findById(decoded.user_id);
         user.password = null;
         return res.send(user);

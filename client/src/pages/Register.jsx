@@ -1,7 +1,28 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import "../css/auth.css"
+import axios from "axios"
+import { registerUser } from '../api-services/user'
 
-function Register() {
+function Register({updateUser}) {
+  const navigate = useNavigate()
+
+  const handleRegister = async(e) =>{
+    e.preventDefault();
+    const {email, name, password} = e.target;
+    const user = {
+      email: email.value,
+      name: name.value,
+      password: password.value
+    }
+    const {data:userData} = await registerUser(user)
+
+    if(userData){
+      localStorage.setItem("token", user.token);
+      updateUser(userData)
+      return navigate("/")
+  }
+}
 
   return (
     <div className='auth'>
@@ -10,13 +31,13 @@ function Register() {
         </div>
         <div className='auth__box'>
             <span className='auth__title'>Create Account</span>
-            <form className='auth__form'>
-                <label className='auth__label' htmlFor="name">Your name</label>
-                <input className='auth__input' type="text" />
-                <label className='auth__label' htmlFor="email">Email</label>
-                <input className='auth__input' type="email" />
-                <label className='auth__label' htmlFor="password">Password</label>
-                <input className='auth__input' type="password" />
+            <form onSubmit={handleRegister} className='auth__form'>
+                <label className='auth__label' name="name" htmlFor="name">Your name</label>
+                <input className='auth__input' name="name" type="text" />
+                <label className='auth__label'  htmlFor="email">Email</label>
+                <input className='auth__input' name="email" type="email" />
+                <label className='auth__label' name="password" htmlFor="password">Password</label>
+                <input className='auth__input' name="password" type="password" />
                 <button type="submit" className='btn btn--atc'>Continue</button>
             </form>
             <p className='auth__notice'>By enrolling your mobile phone number, you consent <br /> to receive automated security notifications via text <br /> message from Amazon. Message and data rates may <br /> apply.</p>

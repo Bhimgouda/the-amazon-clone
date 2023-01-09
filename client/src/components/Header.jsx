@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import {useNavigate} from 'react-router-dom'
 
-function Header() {
-
+function Header({updateUser, user}) {
     const [bottomNavbarLinks,setBottomNavbarLinks] = useState(["Amazon miniTV",
         "Sell",
         "Best Sellers",
@@ -18,6 +18,11 @@ function Header() {
         "Amazon Pay",
         "Home & Kitchen"])
 
+        const navigate = useNavigate()
+
+        const signIn = ()=>{
+            navigate("/login")
+        }
 
   return (
     <header className='nav'>
@@ -36,8 +41,9 @@ function Header() {
 
             {/* Right */}
                 <div className="nav__right">
-                    <div className='nav__right__1'>
-                        <p>Hello, Bhimgouda D Patil</p>
+                    {user && user.name && <p onClick={()=>updateUser()}>logout</p>}
+                    <div onClick={signIn} className='nav__right__1'>
+                        <p>{user && user.name || "login"}</p>
                         <p style={{"font-weight":"700"}}>Account & Lists</p>
                     </div>
                     <div className='nav__right__2'>

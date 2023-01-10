@@ -5,8 +5,10 @@ import WithNav from "./components/WithNav";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useEffect, useState } from "react";
-import { getTokenUser } from "./api-services/user";
 import jwt from 'jsonwebtoken'
+import Checkout from "./pages/Checkout";
+import { Provider } from "react-redux";
+import {store} from "./app/store"
 
 function App() {
   const navigate = useNavigate()
@@ -33,15 +35,18 @@ function App() {
   },[])
 
 return (
-  <Routes>
-    <Route element={<WithoutNav />}>
-      <Route path="/login" element={<Login setUser={setUser}/>} />
-      <Route path="/register" element={<Register  setUser={setUser} />} />
-    </Route>
-    <Route element={<WithNav />}>
-      <Route path="/" element={<Home />} />
-    </Route>
-</Routes>
+  <Provider store={store}>
+    <Routes>
+      <Route element={<WithoutNav />}>
+        <Route path="/login" element={<Login setUser={setUser}/>} />
+        <Route path="/register" element={<Register  setUser={setUser} />} />
+      </Route>
+      <Route element={<WithNav />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/checkout" element={<Checkout />} />
+      </Route>
+    </Routes>
+  </Provider>
 )
 
 }

@@ -28,7 +28,7 @@ function Login({setUser}) {
   return (
     <div className='auth'>
         <div>
-            <img className='logo' src="amazon-logo.png" alt=""/>
+            <img loading="lazy" className='logo' src="amazon-logo.png" alt=""/>
         </div>
         <div className='auth__box'>
             <span className='auth__title'>Sign in</span>

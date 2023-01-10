@@ -10,7 +10,7 @@ function ProductFeed({products}) {
            return <Product product={product} key={index}/>
         })}
 
-      <img className='product-feed__banner' src="https://links.papareact.com/dyz" alt="" />
+      <img loading="lazy" className='product-feed__banner' src="https://links.papareact.com/dyz" alt="" />
     
       <div className="take-2-rows">
         {products.slice(4,5).map((product,index)=>{

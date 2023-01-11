@@ -19,6 +19,7 @@ function App() {
       const userData = jwt.decode(token);
 
       if(!userData){
+        console.log(userData)
         localStorage.removeItem("token")
         return navigate('/login')
       }

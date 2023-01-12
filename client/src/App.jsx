@@ -9,6 +9,8 @@ import jwt from 'jsonwebtoken'
 import Checkout from "./pages/Checkout";
 import { Provider } from "react-redux";
 import {store} from "./app/store"
+import Success from "./pages/Success";
+import Orders from "./pages/Orders";
 
 function App() {
   const navigate = useNavigate()
@@ -43,6 +45,8 @@ return (
         <Route path="/register" element={<Register  setUser={setUser} />} />
       </Route>
       <Route element={<WithNav />}>
+        <Route path="/success" element={<Success />} />
+        <Route path="/orders" element={<Orders />} />
         <Route path="/" element={<Home />} />
         <Route path="/checkout" element={<Checkout />} />
       </Route>

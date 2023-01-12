@@ -18,7 +18,7 @@ function ProductFeed({products}) {
         })}
       </div>
 
-      {products.slice(0,4).map((product,index)=>{
+      {products.slice(5).map((product,index)=>{
            return <Product product={product} key={index}/>
         })}
 

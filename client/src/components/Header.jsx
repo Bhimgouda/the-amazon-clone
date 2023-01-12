@@ -56,10 +56,12 @@ function Header() {
                         <p>{user && user.name || "login"}</p>  
                         <p style={{"fontWeight":"700"}}>Account & Lists</p>
                     </div>
+                    <Link to="/orders">
                     <div className='nav__right__2'>
                         <p>Returns</p>
                         <p style={{"fontWeight":"700"}}>& Orders</p>
                     </div>
+                    </Link>
                     <Link to="/checkout">
                         <div className='nav__right__3'>
                         <span className='total-cart-items'>{items.length}</span>

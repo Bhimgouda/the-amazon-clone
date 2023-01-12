@@ -9,7 +9,7 @@ function Home() {
 
     useEffect(()=>{
         const getPorducts = async()=>{
-            const {data} = await axios.get("https://fakestoreapi.com/products");
+            const {data} = await axios.get("/api/products");
             setProducts(data)
         }
         getPorducts()

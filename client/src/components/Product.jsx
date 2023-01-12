@@ -17,12 +17,10 @@ function Product({product}) {
    )
    const [hasPrime] = useState(Math.random()<0.5)
 
-   product = {...product, hasPrime, rating}
-
 
    const handleAddToBasket = ()=>{
     // dispatch an action and sending the product to the redux store ... basket slice here
-    dispatch(addTobasket(product))
+    dispatch(addTobasket({...product,hasPrime, rating, quantity: 1}))
    }
 
   return (

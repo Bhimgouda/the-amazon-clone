@@ -2,14 +2,24 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {useDispatch} from 'react-redux'
 import React from 'react'
-import { removeFromBasket } from '../slices/basketSlice';
+import { decreaseItemQuantity, increaseItemQuantity, removeFromBasket } from '../slices/basketSlice';
 
 function CheckoutProduct({item}) {
+
+  console.log(item)
 
   const dispatch = useDispatch();
 
   const handleRemoveItem = ()=>{
-    dispatch(removeFromBasket(item.id))
+    dispatch(removeFromBasket(item._id))
+  }
+
+  const handleItemIncrease = ()=>{
+    dispatch(increaseItemQuantity(item._id))
+  }
+
+  const handleItemDecrease = ()=>{
+    dispatch(decreaseItemQuantity(item._id))
   }
 
   return (
@@ -36,8 +46,12 @@ function CheckoutProduct({item}) {
           }
         </div>
         <div className='checkout__product__buttons'>
-            <button className='btn btn--atc'>Add to Basket</button>
-            <button onClick={handleRemoveItem} className='btn btn--atc'>Remove from Basket</button>
+            <div className='checkout__product__quantity-display'>
+              <button onClick={handleItemDecrease} className='btn btn--atc'>-</button>
+                <span className='checkout__product__quantity'>{item.quantity}</span>
+              <button onClick={handleItemIncrease} className='btn btn--atc'>+</button>
+            </div>
+            <button onClick={handleRemoveItem} className='btn btn--atc btn--remove-from-basket'>Remove from Basket</button>
         </div>
     </div>
   )

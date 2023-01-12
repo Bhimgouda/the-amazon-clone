@@ -9,6 +9,15 @@ const userSchema = new Schema({
     },
     password: String,
     token: String,
+    orders: [
+        {
+        _id: String,
+        orderAmount: Number,
+        shippingAmount: Number,
+        shippingAddress: {},
+        images: Array,
+        }
+    ]
 })
 
 const User = mongoose.model('User', userSchema);

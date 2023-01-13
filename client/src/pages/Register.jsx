@@ -3,8 +3,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import "../css/auth.css"
 import axios from "axios"
 import { registerUser } from '../api-services/user'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../slices/userSlice'
 
-function Register({setUser}) {
+function Register() {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleRegister = async(e) =>{
@@ -19,8 +22,7 @@ function Register({setUser}) {
 
     if(userData){
       localStorage.setItem("token", userData.token);
-      console.log(setUser)
-      setUser()
+      dispatch(setUser(userData))
       return navigate("/")
   }
 }

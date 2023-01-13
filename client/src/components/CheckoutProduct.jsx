@@ -6,8 +6,6 @@ import { decreaseItemQuantity, increaseItemQuantity, removeFromBasket } from '..
 
 function CheckoutProduct({item}) {
 
-  console.log(item)
-
   const dispatch = useDispatch();
 
   const handleRemoveItem = ()=>{

@@ -17,7 +17,7 @@ const userSchema = new Schema({
         shippingAddress: {},
         images: Array,
         }
-    ]
+    ],
 })
 
 const User = mongoose.model('User', userSchema);

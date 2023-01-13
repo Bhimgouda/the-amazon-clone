@@ -4,8 +4,6 @@ function Order({order}) {
 
   const { _id, orderAmount, shippingAddress, shippingAmount, images } = order;
 
-  console.log(order)
-
   return (
     <div className='order'>
       <div className='order__top'>

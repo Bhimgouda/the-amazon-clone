@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useReducer, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import {Link, useNavigate} from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectItems } from '../slices/basketSlice'
+import { getUser, setUser } from '../slices/userSlice'
 
 function Header() {
     const [bottomNavbarLinks,setBottomNavbarLinks] = useState(["Amazon miniTV",
@@ -20,11 +21,13 @@ function Header() {
         "Amazon Pay",
         "Home & Kitchen"])
 
+    const dispatch = useDispatch()
     const navigate = useNavigate()
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = useSelector(getUser)
+
 
     const handleLogout = ()=>{
-        localStorage.clear()
+        dispatch(setUser())
         navigate("/")
     }
 
@@ -51,8 +54,7 @@ function Header() {
 
             {/* Right */}
                 <div className="nav__right">
-                    {/* {user && user.name && <p onClick={handleLogout} >logout</p>}  */}
-                    <div onClick={()=>user ? handleLogout() : navigate("/login")} className='nav__right__1'>
+                    <div onClick={()=> user._id ? handleLogout() : navigate("/login")} className='nav__right__1'>
                         <p>{user && user.name || "login"}</p>  
                         <p style={{"fontWeight":"700"}}>Account & Lists</p>
                     </div>

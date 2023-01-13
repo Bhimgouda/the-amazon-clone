@@ -14,7 +14,6 @@ const Product = require("./models/product");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 
-
 // WEBHOOK FOR FULLFILLING THE ORDER
 // It is a set of events that gets fired when a user proceeds from checkout session and has all the data of the order processed(success or fail)
 app.post("/api/webhook", express.raw({type: 'application/json'}) , catchAsync(async(req,res)=>{
@@ -126,19 +125,11 @@ app.post('/api/login',validateUser, catchAsync(async(req,res)=>{
     return res.send(user)
 }))
 
-app.get("/api/tokenUser",catchAsync( async(req,res)=>{
-    const token = req.headers["x-access-token"];
-
-    if(!token) return res.send(null);
-
-    const decoded = jwt.decode(token,process.env.TOKEN_KEY)
-    if(decoded){
-        
-        const user = await User.findById(decoded.user_id);
+app.get("/api/user/:id",catchAsync( async(req,res)=>{
+        const {id} = req.params;
+        const user = await User.findById(id);
         user.password = null;
         return res.send(user);
-    }
-        
 }))
 
 app.post("/api/create-checkout-session", catchAsync(async(req,res)=>{

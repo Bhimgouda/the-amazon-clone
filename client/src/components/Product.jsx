@@ -19,7 +19,7 @@ function Product({product}) {
 
 
    const handleAddToBasket = ()=>{
-    // dispatch an action and sending the product to the redux store ... basket slice here
+    // dispatch an action and sending the product to the redux store ... bakset slice here
     dispatch(addTobasket({...product,hasPrime, rating, quantity: 1}))
    }
 
@@ -29,7 +29,7 @@ function Product({product}) {
 
         <img loading="lazy" className='product__image' src={image} alt="" />
 
-        <h4 className='product__title'>{title}</h4>
+        <h4 className='product__title line-clamp-2'>{title}</h4>
 
         <div>
             {Array(rating)
@@ -44,15 +44,15 @@ function Product({product}) {
         <div className='product__price'>
             <span>${price}</span>
         </div>
-
-        {hasPrime && 
-            <div className='product__prime-container'>
-                <img loading="lazy" className='product__prime-logo' src="https://links.papareact.com/fdw" alt="" />
-                <p>FREE Next-day Delivery</p>
-            </div>
-        }
-
-        <button onClick={handleAddToBasket} className='btn btn--atc'>Add to basket</button>
+        <div style={{"marginTop": "auto", "width": "100%"}}>
+            {hasPrime && 
+                <div className='product__prime-container'>
+                    <img loading="lazy" className='product__prime-logo' src="https://links.papareact.com/fdw" alt="" />
+                    <p>FREE Next-day Delivery</p>
+                </div>
+            }
+            <button onClick={handleAddToBasket} className='btn btn--atc'>Add to basket</button>
+        </div>
     </div>
   )
 }

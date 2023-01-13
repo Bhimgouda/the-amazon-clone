@@ -10,7 +10,6 @@
     "express": "^4.18.2",
     "joi": "^17.7.0",
     "jsonwebtoken": "^9.0.0",
-    "micro": "^10.0.1",
     "mongoose": "^6.8.3",
     "react-responsive-carousel": "^3.2.23",
     "stripe": "^11.6.0"

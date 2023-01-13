@@ -10,7 +10,6 @@ const validateUser = require('./middlewares/validation');
 const CustomError = require('./utils/appError');
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
-const { buffer } = require("micro");
 const Product = require("./models/product");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
@@ -52,7 +51,6 @@ async function fulfillTheOrder(session){
     })
 
     user.save();
-    console.log(`SUCCESS: Order ${session.id} has been added to the DB`);
 }
 
 

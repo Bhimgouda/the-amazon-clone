@@ -46,10 +46,10 @@ function CheckoutProduct({item}) {
           }
         </div>
         <div className='checkout__product__buttons'>
-            <div className='checkout__product__quantity-display'>
-              <button onClick={handleItemDecrease} className='btn btn--atc'>-</button>
+            <div className='checkout__product__quantity-display' >
+              <button onClick={handleItemDecrease} className='btn btn--atc btn--'>-</button>
                 <span className='checkout__product__quantity'>{item.quantity}</span>
-              <button onClick={handleItemIncrease} className='btn btn--atc'>+</button>
+              <button onClick={handleItemIncrease} className='btn btn--atc '>+</button>
             </div>
             <button onClick={handleRemoveItem} className='btn btn--atc btn--remove-from-basket'>Remove from Basket</button>
         </div>

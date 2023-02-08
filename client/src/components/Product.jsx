@@ -42,7 +42,7 @@ function Product({product}) {
         <p className='line-clamp-2 product__description'>{description}</p>
 
         <div className='product__price'>
-            <span>${price}</span>
+            <span>₹{price}</span>
         </div>
         <div style={{"marginTop": "auto", "width": "100%"}}>
             {hasPrime && 

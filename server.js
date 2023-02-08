@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV !== "prodeuction") require("dotenv").config();
+require("dotenv").config();
 
 const express = require('express');
 const app = express();
@@ -13,6 +13,7 @@ const jwt = require("jsonwebtoken");
 const Product = require("./models/product");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
+const dbUrl = process.env.MONGODB_URI || "mongodb://0.0.0.0:27017/the-amazon-clone";
 
 // WEBHOOK FOR FULLFILLING THE ORDER
 // It is a set of events that gets fired when a user proceeds from checkout session and has all the data of the order processed(success or fail)
@@ -30,7 +31,6 @@ app.post("/api/webhook", express.raw({type: 'application/json'}) , catchAsync(as
     // Handle the checkout.session.completed event
     if(event.type==="checkout.session.completed"){
         const session = event.data.object;
-        console.log(session.shipping_details.address)
         // Fulfill the order...
         fulfillTheOrder(session)
     }
@@ -128,6 +128,7 @@ app.post('/api/login',validateUser, catchAsync(async(req,res)=>{
 app.get("/api/user/:id",catchAsync( async(req,res)=>{
         const {id} = req.params;
         const user = await User.findById(id);
+        user.orders.reverse();
         user.password = null;
         return res.send(user);
 }))
@@ -171,8 +172,8 @@ app.post("/api/create-checkout-session", catchAsync(async(req,res)=>{
         },
         line_items: transformedItems,
         mode: "payment",
-        success_url: `${process.env.HOST}/success`,
-        cancel_url: `${process.env.HOST}/checkout`,
+        success_url: `${process.env.CLIENT}/success`,
+        cancel_url: `${process.env.CLIENT}/checkout`,
         metadata: {
             email,
             images: JSON.stringify(items.map((item) => item.image)),
@@ -192,16 +193,6 @@ app.get("/api/products", catchAsync(async(req,res)=>{
 }))
 
 
-// Order Routes
-
-app.get("/api/:id/orders", catchAsync(async(req,res)=>{
-    const {id} = req.params;
-    const user = await User.findById(id)
-
-    return res.send(user.orders);
-}))
-
-
 
 // Error Handling Middleware
 
@@ -211,16 +202,16 @@ app.use((err,req,res,next)=>{
     return res.status(status).send(message);
 })
 
+const PORT = process.env.PORT || 5000;
 
 
-app.listen(5000,()=>[
-    console.log('Server listening on port 5000')
-])
+app.listen(PORT,()=>{
+    console.log(`Server listening on port ${PORT}`)
+})
 
 mongoose.set("strictQuery", false);
-mongoose.connect("mongodb://127.0.0.1:27017/the-amazon-clone",{
-})
-.then(console.log("Successfully connected to the DB"))
+mongoose.connect(dbUrl)
+.then(()=>console.log("Successfully connected to the DB"))
 .catch((e)=>{
 console.log('database connection failed. exiting now...')
 console.log(e)

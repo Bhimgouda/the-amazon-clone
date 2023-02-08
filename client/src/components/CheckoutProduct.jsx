@@ -34,7 +34,7 @@ function CheckoutProduct({item}) {
           </div>
           <p className='product__description checkout__product__description line-clamp-3'>{item.description}</p>
           <div className='product__price'>
-            <span>${item.price}</span>
+            <span>₹{item.price}</span>
           </div>
           {item.hasPrime && 
             <div className='product__prime-container'>

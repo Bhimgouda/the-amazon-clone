@@ -13,7 +13,7 @@ function Order({order}) {
           </div>
           <div className='order__top__section2'>
             <p className='order__top__title'>TOTAL</p>
-            <p className='order__top__title__values'>{`${orderAmount} - ${shippingAddress.city}, ${shippingAddress.state} - ${shippingAddress.postal_code}`}</p>
+            <p className='order__top__title__values'>{`₹${orderAmount} - ${shippingAddress.city}, ${shippingAddress.state} - ${shippingAddress.postal_code}`}</p>
           </div>
 
             <p className='order__top__items__count' > {images.length} items</p>

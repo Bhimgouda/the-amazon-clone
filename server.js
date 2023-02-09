@@ -128,9 +128,12 @@ app.post('/api/login',validateUser, catchAsync(async(req,res)=>{
 app.get("/api/user/:id",catchAsync( async(req,res)=>{
         const {id} = req.params;
         const user = await User.findById(id);
-        user.orders.reverse();
-        user.password = null;
-        return res.send(user);
+        if(user){
+            user.orders.reverse();
+            user.password = null;
+            return res.send(user);
+        }
+        res.send(null)
 }))
 
 app.post("/api/create-checkout-session", catchAsync(async(req,res)=>{
@@ -188,7 +191,11 @@ app.post("/api/create-checkout-session", catchAsync(async(req,res)=>{
 // Product Routes
 
 app.get("/api/products", catchAsync(async(req,res)=>{
-    const products = await Product.find();
+    let products = await Product.find();
+    products = products.map(p=>{
+        p.image = p.image.replace("/upload", "/upload/w_200")
+        return p;
+    })
     return res.send(products);
 }))
 

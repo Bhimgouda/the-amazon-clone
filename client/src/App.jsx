@@ -33,7 +33,9 @@ function App() {
       if(token){
         const userData = jwt.decode(token);
         const {data:user} = await axios.get(`/api/user/${userData.user_id}`)
-        dispatch(setUser(user))
+        if(user){
+          dispatch(setUser(user))
+        }
       }
     }
     requestUser()

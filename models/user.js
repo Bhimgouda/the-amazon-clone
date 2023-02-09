@@ -16,6 +16,7 @@ const userSchema = new Schema({
         shippingAmount: Number,
         shippingAddress: {},
         images: Array,
+        timeStamp: String,
         }
     ],
 })

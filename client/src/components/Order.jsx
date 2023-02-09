@@ -2,14 +2,14 @@ import React from 'react'
 
 function Order({order}) {
 
-  const { _id, orderAmount, shippingAddress, shippingAmount, images } = order;
+  const { _id, orderAmount, shippingAddress, timeStamp, shippingAmount, images } = order;
 
   return (
     <div className='order'>
       <div className='order__top'>
           <div className='order__top__section1'>
             <p className='order__top__title'>ORDER PLACED</p>
-            <p className='order__top__title__values'>22 May 2021</p>
+            <p className='order__top__title__values'>{timeStamp.slice(5,16)}</p>
           </div>
           <div className='order__top__section2'>
             <p className='order__top__title'>TOTAL</p>

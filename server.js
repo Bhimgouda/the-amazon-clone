@@ -47,9 +47,9 @@ async function fulfillTheOrder(session){
         shippingAmount: session.total_details.amount_shipping /100,
         shippingAddress: session.shipping_details.address,
         images: JSON.parse(session.metadata.images),
+        timeStamp: new Date().toUTCString(),
     })
-
-    user.save();
+    await user.save();
 }
 
 

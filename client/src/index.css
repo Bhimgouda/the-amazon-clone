@@ -354,7 +354,7 @@ a{
 @media screen and (min-width:1024px) {
   .product-feed{
     grid-template-columns: repeat(3,1fr);
-    margin-top: -250px;
+    margin-top: -200px;
   }
    .product-feed__banner{
     grid-column: 1/4;
@@ -368,7 +368,7 @@ a{
 @media screen and (min-width:1400px) {
   .product-feed{
     grid-template-columns: repeat(4,1fr);
-    margin-top: -300px;
+    margin-top: -250px;
   }
   .product-feed__banner{
     grid-column: 1/5
